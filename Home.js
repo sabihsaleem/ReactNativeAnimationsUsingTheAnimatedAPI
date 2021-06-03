@@ -1,5 +1,12 @@
 import React from 'react';
-import {Animated, Easing, Text, View, TouchableOpacity} from 'react-native';
+import {
+  Animated,
+  Easing,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,8 +33,22 @@ class Home extends React.Component {
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg'],
     });
+    const DATA = [
+      {
+        id: 'ReactNativeEasings',
+        title: 'React Native Easings',
+      },
+      {
+        id: 'AnimatedTiming',
+        title: 'Animated Timing',
+      },
+      {
+        id: 'AnimatedSpring',
+        title: 'Animated Spring',
+      },
+    ];
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 1, alignItems: 'center', marginTop: '50%',}}>
         <Text> Hello! </Text>
         <Animated.Image
           style={{
@@ -40,23 +61,30 @@ class Home extends React.Component {
             uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png',
           }}
         />
-        <TouchableOpacity
-          style={{
-            width: '50%',
-            height: '5%',
-            backgroundColor: 'lightblue',
-            borderColor: 'blue',
-            borderWidth: 2,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: '10%',
-          }}
-          onPress={() => this.props.navigation.navigate('ReactNativeEasings')}
-        >
-          <Text style={{fontSize: 20, textAlign: 'center'}}>
-            React Native Easings
-          </Text>
-        </TouchableOpacity>
+        <FlatList
+          data={DATA}
+          renderItem={({item, index}) => (
+            <View>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: 'lightblue',
+                  borderColor: 'blue',
+                  borderWidth: 2,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '10%',
+                }}
+                onPress={() =>
+                  this.props.navigation.navigate(item.id)
+                }>
+                <Text style={{fontSize: 20, textAlign: 'center'}}>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          keyExtractor={(item, index) => `${index}`}
+        />
       </View>
     );
   }
