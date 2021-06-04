@@ -46,6 +46,10 @@ class Home extends React.Component {
         id: 'AnimatedSpring',
         title: 'Animated Spring',
       },
+      {
+        id: 'AnimatedStagger',
+        title: 'Animated Stagger',
+      },
     ];
     return (
       <View style={{flex: 1, alignItems: 'center', marginTop: '50%',}}>
